@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "da7c753f-98ea-4a72-9d7f-0de621ca70fe",
+		"name": "coderbite",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19287356"
+	},
+	"item": [
+		{
+			"name": "sample_weather_request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Latitude is correct\", function () {",
+							"    pm.expect(pm.response.json().coord.lat).to.eql(51.51);",
+							"});",
+							"",
+							"pm.test(\"Longitude is correct\", function () {",
+							"    pm.expect(pm.response.json().coord.lon).to.eql(-0.13);",
+							"});",
+							"pm.test(\"Temperature is within range\", function () {",
+							"    var temperature = pm.response.json().main.temp;",
+							"    pm.expect(temperature).to.be.within(0, 290);",
+							"});",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Base is stations\", function () {",
+							"    pm.expect(pm.response.json().base).to.eql(\"stations\");",
+							"});",
+							"pm.test(\"Main temperature is within range\", function () {",
+							"    var main = pm.response.json().main;",
+							"    pm.expect(main.temp).to.be.at.least(279.15);",
+							"    pm.expect(main.temp).to.be.at.most(281.15);",
+							"    pm.expect(main.pressure).to.eql(1012);",
+							"    pm.expect(main.humidity).to.eql(81);",
+							"    pm.expect(main.temp_min).to.eql(279.15);",
+							"    pm.expect(main.temp_max).to.eql(281.15);",
+							"});",
+							"pm.test(\"Country is GB\", function () {",
+							"    pm.expect(pm.response.json().sys.country).to.eql(\"GB\");",
+							"});",
+							"pm.test(\"Name is London\", function () {",
+							"    pm.expect(pm.response.json().name).to.eql(\"London\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6 907d289e10d714a6e88b30761fae22.",
+					"protocol": "https",
+					"host": [
+						"samples",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "London,uk"
+						},
+						{
+							"key": "appid",
+							"value": "b6 907d289e10d714a6e88b30761fae22."
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
